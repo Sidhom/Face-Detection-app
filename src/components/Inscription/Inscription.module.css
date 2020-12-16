@@ -1,0 +1,31 @@
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input {
+    margin-left: 20px;
+}
+.email {
+    padding-right: 27px;
+}
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 300px;
+    margin: 8rem auto;
+    border: 1px solid #080808;
+}
+.title {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -.5px;
+}
+.label {
+    display: flex;
+}
+.label:after {
+    content:" *";
+    color: red;
+  }

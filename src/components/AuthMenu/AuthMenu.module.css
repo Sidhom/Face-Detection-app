@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link {
+    color: #ffffff;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 1rem;
+}

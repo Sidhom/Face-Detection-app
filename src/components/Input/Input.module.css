@@ -1,0 +1,12 @@
+.container {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    width: 230px;
+}
+input:required:valid {
+    border-color: green;
+  }
+  input:required:invalid {
+    border-color: red;
+  }

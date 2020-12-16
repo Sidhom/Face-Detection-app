@@ -12,6 +12,7 @@
     width: 100%;
     display:flex;
     justify-content: space-between;
+    align-items: center;
   }
   .title {
     padding-left: 20px;
@@ -19,5 +20,8 @@
   .faceLogo {
     height: 7vmin;
     pointer-events: none;
-    padding: 20px;
+    padding: 30px;
+  }
+  .container {
+    display: flex;
   }
