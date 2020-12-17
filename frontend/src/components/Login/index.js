@@ -5,19 +5,13 @@ import Button from '../Button';
 import Input from '../Input';
 import styles from './Login.module.css';
  
-const Login = ({ history }) => {
+const Login = () => {
   const email = useFormInput('');
   const password = useFormInput('');
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, user,  error, loading, allFieldsAreValid } = useLogin({ emailRef, passwordRef,  email: email.value, password: password.value });
+  const { login,  error, loading, allFieldsAreValid } = useLogin({ emailRef, passwordRef,  email: email.value, password: password.value });
 
-  const handleLogin = () => {
-    const connected = login();
-    console.log(connected);
-    console.log(user);
-    if(connected) history.push('/Home');  
-  }
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Sign in to FACE DETECTION</h1>
@@ -36,7 +30,7 @@ const Login = ({ history }) => {
       </div>
       </div>
       {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-      <Button label={loading ? 'Loading...' : 'Login'} action={handleLogin} disabled={loading || !allFieldsAreValid} />
+      <Button label={loading ? 'Loading...' : 'Login'} action={login} disabled={loading || !allFieldsAreValid} />
     </div>
   );
 }

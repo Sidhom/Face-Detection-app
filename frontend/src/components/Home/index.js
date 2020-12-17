@@ -7,13 +7,13 @@ import styles from './Home.module.css';
 const Home = () => {
     const videoRef = useRef();
     const canvasRef = useRef();
-    const { startFaceReconginition, stopFaceReconginition } = useFaceDetection(videoRef, canvasRef);
+    const[ state, actions ] = useFaceDetection(videoRef, canvasRef);
     return (
         <Fragment>
             <Video videoRef={videoRef} canvasRef={canvasRef} />
             <div className={styles.container}>
-            <Button style = {styles.startButton} action = {startFaceReconginition} label ="Start Recognition"  />
-            <Button style = {styles.stopButton} action = {stopFaceReconginition} label ="Stop Recognition"  />
+            <Button style = {styles.startButton} disabled={state.startDisabled} action = {actions.startFaceReconginition} label ="Start Recognition"  />
+            <Button style = {styles.stopButton} disabled={state.stopDisabled} action = {actions.stopFaceReconginition} label ="Stop Recognition"  />
             </div>
         </Fragment>
     )

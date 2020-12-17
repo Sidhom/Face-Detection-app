@@ -1,7 +1,9 @@
-import {useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as faceapi from 'face-api.js';
 
 const useFaceDetection = (video, canvas) => {
+    const [startDisabled, setStartDisabled] = useState(false);
+    const [stopDisabled, setStopDisabled] = useState(true);
     
     let timer;
     const MODEL_URL = '/models';
@@ -36,16 +38,26 @@ const useFaceDetection = (video, canvas) => {
       }
     
      const startFaceReconginition = () => {
+        setStartDisabled(true);
+        setStopDisabled(false);
         timer = setInterval(detectFaces, 100);
     
     }
     const stopFaceReconginition = () => {
+      setStartDisabled(false);
+      setStopDisabled(true);
       clearInterval(timer);
     }
-    return {
+    return [
+      {
+        startDisabled,
+        stopDisabled
+      },
+      {
         startFaceReconginition,
         stopFaceReconginition
-    }
+      }  
+    ]
 }
 
 export default useFaceDetection ;

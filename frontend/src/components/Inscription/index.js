@@ -52,7 +52,7 @@ const Inscription = ({ history }) => {
       </div>
       </div>
       {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-      <Button label={loading ? 'Loading...' : 'SIGN UP'} action={handleSignUp} disabled={loading || !allFieldsAreValid} />
+      <Button label={loading ? 'Loading...' : 'Sign up'} action={handleSignUp} disabled={loading || !allFieldsAreValid} />
     </div>
   );
 }

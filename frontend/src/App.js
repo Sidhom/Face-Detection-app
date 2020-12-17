@@ -1,25 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import styles from './App.module.css';
 import Header from './components/Header';
-import Home from './components/Home';
-import Login from './components/Login';
-import Inscription from './components/Inscription';
-const App = () => {
+import Routes from './routes';
 
+const App = () => {
   return (
     <div className={styles.app}>
-       
+         <RecoilRoot>
           <Router>
           <Header />
-            <Switch>
-                <Route path="/Inscription" component={Inscription} />
-                <Route path="/Login" component={Login} />
-                <Route path="/Home" component={Home} />
-                <Route path="/" component={Login} />
-         
-             </Switch>
+          <Routes />
           </Router>
+          </RecoilRoot>
     </div>
   );
 }

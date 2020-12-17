@@ -1,11 +1,16 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { loggedInUser } from '../store/state';
 import useFormValidation from './useFormValidation';
 
 const useLogin = ({ emailRef, passwordRef, email, password }) => {
-  const [user, setUser] = useState(null);
+  const history = useHistory();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const { allFieldsAreValid } = useFormValidation({ inputRefs: [emailRef, passwordRef], inputValues : [email, password] });
+  const [loggedUser, setLoggedUser] = useRecoilState(loggedInUser);
+  
  const url = 'http://localhost:3000/api/signin';
 // request options
 const options = {
@@ -21,18 +26,20 @@ const options = {
       response.json()).then(response => {
           setLoading(false);
           if(response.success) {
-            setUser(response);
+            setLoggedUser(response.user);
             setError(null);
+            localStorage.setItem('user', JSON.stringify(response.user));
+            history.push("/Home");
           } else {
-            setUser(null);
+            setLoggedUser(null);
             setError(response.msg);
           }
       });
-     return !!user;
+     return !!loggedUser;
   };
   return {
     login,
-    user,
+    loggedUser,
     error,
     loading,
     allFieldsAreValid
