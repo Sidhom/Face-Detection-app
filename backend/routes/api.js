@@ -6,8 +6,8 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 var User = require("../models/user");
-
-router.post('/signup', function(req, res) {
+var Image = require("../models/image");
+router.post('/signup', (req, res) => {
     if (!req.body.email || !req.body.password || !req.body.firstName || !req.body.lastName) {
       res.json({success: false, msg: 'Please fill in all the required fields.'});
     } else {
@@ -22,7 +22,8 @@ router.post('/signup', function(req, res) {
         if (err) {
           return res.json({success: false, msg: 'User already exists.'});
         }
-        res.json({success: true, msg: 'Successful created new user.'});
+
+        res.json({success: true, user: newUser  ,msg: 'Successful created new user.'});
       });
     }
   });
@@ -49,6 +50,24 @@ router.post('/signup', function(req, res) {
         });
       }
     });
+  });
+
+  router.post('/uploadImage', (req, res) => {
+    if (!req.body.img) {
+      res.json({success: false, msg: 'No Image found.'});
+    } else {
+      var newImage = new Image({
+        userName: req.body.userName,
+        img:{ data: req.body.image, contentType: req.body.contentType } 
+      });
+      // save the image
+      newImage.save((err) => {
+        if (err) {
+          return res.json({success: false, msg: 'Error Uploading.'});
+        }
+        res.json({success: true, msg: 'Successful saved image.'});
+      });
+    }
   });
 
   module.exports = router;

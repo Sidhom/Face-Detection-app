@@ -5,7 +5,7 @@ import Button from '../Button';
 import Input from '../Input';
 import styles from './Inscription.module.css';
  
-const Inscription = ({ history }) => {
+const Inscription = () => {
 
   const email = useFormInput('');
   const password = useFormInput('');
@@ -15,13 +15,8 @@ const Inscription = ({ history }) => {
   const lastNameRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
-  const { signup, user,  error, loading, allFieldsAreValid} = useInscription({ firstNameRef, lastNameRef, passwordRef, emailRef, email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value, });
+  const { signup,  error, loading, allFieldsAreValid} = useInscription({ firstNameRef, lastNameRef, passwordRef, emailRef, email: email.value, password: password.value, firstName: firstName.value, lastName: lastName.value, });
 
-  const handleSignUp = () => {
-    const connected = signup();
-    console.log('user', user)
-    if(connected) history.push('/Home');  
-  }
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Sign up to FACE DETECTION</h1>
@@ -52,7 +47,7 @@ const Inscription = ({ history }) => {
       </div>
       </div>
       {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
-      <Button label={loading ? 'Loading...' : 'Sign up'} action={handleSignUp} disabled={loading || !allFieldsAreValid} />
+      <Button label={loading ? 'Loading...' : 'Sign up'} action={signup} disabled={loading || !allFieldsAreValid} />
     </div>
   );
 }
